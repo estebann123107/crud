@@ -4,3 +4,4 @@ export interface Task {
     completed: boolean;
 }
 
+export type TaskList = Task[];
