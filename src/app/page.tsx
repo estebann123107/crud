@@ -1,4 +1,5 @@
 import { TaskListComponent } from "./components/task-list-component";
+import { ThemeToggle } from "./components/theme-toggle";
 
 export default function TodoView() {
   return (
@@ -13,6 +14,7 @@ export default function TodoView() {
                 .
               </span>
             </h1>
+            <ThemeToggle />
           </div>
         </header>
         <TaskListComponent />
