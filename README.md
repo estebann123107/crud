@@ -6,13 +6,13 @@ todo list app
 First, run the development server:
 
 ```bash
-npm run dev
+npm run juju
 # or
-yarn dev
+yarn juju
 # or
-pnpm dev
+pnpm juju
 # or
-bun dev
+bun juju
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

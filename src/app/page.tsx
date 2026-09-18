@@ -1,9 +1,11 @@
+import { AsideComponent } from "./components/aside-component";
 import { TaskListComponent } from "./components/task-list-component";
 import { ThemeToggle } from "./components/theme-toggle";
 
 export default function TodoView() {
   return (
     <main className="todo-page">
+      <AsideComponent />
       <section className="todo-panel" aria-labelledby="todo-title">
         <header className="todo-header">
           <p className="eyebrow">Organiza tu día</p>
