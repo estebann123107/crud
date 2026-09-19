@@ -1,11 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { useMenuView } from "@/app/hooks/use-menu-view";
-import { useAsideState } from "@/app/hooks/use-aside-state";
 import { MenuComponent } from "./menu-component";
 
 export const AsideComponent = () => {
-  const { isExpanded, setIsExpanded } = useAsideState();
+  const [isExpanded, setIsExpanded] = useState(false);
   const { view, setView } = useMenuView();
 
   return (
@@ -17,7 +17,7 @@ export const AsideComponent = () => {
         aria-expanded={isExpanded}
         aria-label={isExpanded ? "Cerrar herramientas" : "Abrir herramientas"}
       >
-       <h2 className="aside-title">Crud</h2>
+        <h2 className="aside-title">Crud</h2>
       </button>
 
       <div className="aside-content">
