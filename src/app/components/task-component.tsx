@@ -36,6 +36,8 @@ export const TaskComponent = ({
     .filter(Boolean)
     .join(" ");
 
+  const titleInputId = `task-title-${currentTask.id}`;
+
   return (
     <article
       className={className}
@@ -54,8 +56,11 @@ export const TaskComponent = ({
         </div>
 
         <div className="task-text-label">
-          <span className="sr-only">Título de la tarea</span>
+          <label className="sr-only" htmlFor={titleInputId}>
+            Título de la tarea
+          </label>
           <textarea
+            id={titleInputId}
             ref={textRef}
             value={currentTask.title}
             onChange={(event) => updateTaskTitle(event.target.value)}
