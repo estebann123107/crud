@@ -12,6 +12,8 @@
   /* Acento — se usa poco y a propósito */
   --color-accent: #4f5bd5;
   --color-accent-hover: #414ec4;
+  /* Para texto sobre accent-soft: el acento plano no llega a 4.5:1 */
+  --color-accent-strong: #3a42a8;
   --color-accent-soft: #eef0fc;
   --color-accent-ring: rgba(79, 91, 213, 0.22);
 
@@ -19,16 +21,21 @@
   --color-bg-app: #f6f7f9;
   --color-bg-surface: #ffffff;
   --color-bg-subtle: #f9fafb;
+  --color-bg-sunken: #f1f3f6;
   --color-border: #e6e8ec;
   --color-border-strong: #d3d7de;
+  --color-scrim: rgba(17, 24, 39, 0.48);
 
-  /* Texto */
+  /* Texto — los tres tonos pasan 4.5:1 sobre surface y sobre subtle */
   --color-text-main: #1c1f26;
-  --color-text-muted: #6b7280;
-  --color-text-faint: #9ca3af;
+  --color-text-muted: #4b5563;
+  --color-text-faint: #6b7280;
   --color-text-on-accent: #ffffff;
 
   --color-danger: #d1495b;
+  --color-danger-text: #a8374a;
+  --color-danger-soft: #fdf0f2;
+  --color-danger-border: #f3c8cf;
 
   /* Tipografía */
   --font-family-base:
@@ -53,16 +60,40 @@
   --spacing-5: 1.25rem;
   --spacing-6: 1.5rem;
   --spacing-8: 2rem;
+  --spacing-12: 3rem;
 
   /* Radios */
   --radius-sm: 8px;
   --radius-md: 10px;
-  --radius-lg: 14px;
+  --radius-lg: 12px;
   --radius-full: 9999px;
 
   /* Sombras — apenas perceptibles */
   --shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.04);
   --shadow-sm: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+  --shadow-md: 0 6px 16px rgba(16, 24, 40, 0.16);
+  --shadow-lg: 0 16px 48px rgba(16, 24, 40, 0.24);
+
+  /* Iconos y altos de control — antes iban a mano en cada llamada */
+  --icon-sm: 14px;
+  --icon-md: 18px;
+  --icon-lg: 20px;
+
+  --control-sm: 2rem; /* 32px */
+  --control-md: 2.5rem; /* 40px */
+  --control-lg: 2.75rem; /* 44px */
+  --tap-min: 2.75rem; /* mínimo táctil */
+
+  /* Estructura */
+  --aside-width: 264px;
+  --aside-rail-width: 72px;
+  --drawer-width: 288px;
+  --content-max: 640px;
+
+  /* Apilado */
+  --z-scrim: 30;
+  --z-drawer: 40;
+  --z-tooltip: 50;
 
   /* Movimiento */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -74,23 +105,35 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --color-accent: #7b87ea;
-  --color-accent-hover: #8d98f0;
+  --color-accent: #8d98f0;
+  --color-accent-hover: #a6aef5;
+  --color-accent-strong: #a6aef5;
   --color-accent-soft: #23263a;
-  --color-accent-ring: rgba(123, 135, 234, 0.28);
+  --color-accent-ring: rgba(141, 152, 240, 0.32);
 
   --color-bg-app: #121317;
   --color-bg-surface: #1a1c21;
   --color-bg-subtle: #1f2127;
+  --color-bg-sunken: #16181c;
   --color-border: #2a2d34;
   --color-border-strong: #3a3e47;
+  --color-scrim: rgba(0, 0, 0, 0.6);
 
   --color-text-main: #e8eaed;
-  --color-text-muted: #9aa0aa;
-  --color-text-faint: #6f757f;
+  --color-text-muted: #a8aeb8;
+  --color-text-faint: #8b929c;
+  /* El acento oscuro es claro: el texto encima va oscuro, no blanco */
+  --color-text-on-accent: #16181c;
+
+  --color-danger: #f2879a;
+  --color-danger-text: #f2879a;
+  --color-danger-soft: #2a1e22;
+  --color-danger-border: #5a2b35;
 
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
 }
 
 /* ------------------------------------------------------------
@@ -232,7 +275,7 @@ p {
 }
 
 .menu-item-button.is-active {
-  color: var(--color-accent);
+  color: var(--color-accent-strong);
   background: var(--color-accent-soft);
   font-weight: var(--font-weight-medium);
 }
@@ -758,11 +801,11 @@ button:focus-visible,
     left: var(--spacing-4);
     top: var(--spacing-4);
     bottom: var(--spacing-4);
-    z-index: 20;
+    z-index: var(--z-drawer);
     width: min(82vw, 260px);
     min-width: 0;
     height: auto;
-    box-shadow: 0 18px 40px rgba(17, 24, 39, 0.18);
+    box-shadow: var(--shadow-lg);
   }
 
   .aside.is-expanded .aside-content {
