@@ -1,4 +1,4 @@
-import { Icon, type IconProps } from "./icon";
+import { Icon, type IconProps } from "./icon-base";
 
 /* lucide: moon */
 export const MoonIcon = (props: IconProps) => {

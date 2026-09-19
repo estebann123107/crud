@@ -1,4 +1,4 @@
-import { Icon, type IconProps } from "./icon";
+import { Icon, type IconProps } from "./icon-base";
 
 /* lucide: check */
 export const CheckIcon = (props: IconProps) => {

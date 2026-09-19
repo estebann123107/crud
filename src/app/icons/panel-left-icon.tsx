@@ -1,4 +1,4 @@
-import { Icon, type IconProps } from "./icon";
+import { Icon, type IconProps } from "./icon-base";
 
 type PanelLeftIconProps = IconProps & {
   /* Hacia dónde apunta el galón: el sentido en que se moverá el panel. */
