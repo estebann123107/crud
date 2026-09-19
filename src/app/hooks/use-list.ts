@@ -1,9 +1,11 @@
 import { FormEvent, useRef, useState } from 'react'
-import { Task, TaskList } from '@/app/types'
+import { Task } from '@/app/types'
 import { useStorage } from './use-storage'
 
+export const TASK_STORAGE_KEY = 'todo-list'
+
 export const useList = () => {
-    const [tasks, setTasks] = useStorage('todo-list', []) as [TaskList, React.Dispatch<React.SetStateAction<TaskList>>]
+    const [tasks, setTasks] = useStorage(TASK_STORAGE_KEY)
     const [newTaskTitle, setNewTaskTitle] = useState('')
     const inputRef = useRef<HTMLInputElement>(null)
 

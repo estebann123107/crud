@@ -1,11 +1,10 @@
-import { Task, TaskList } from "@/app/types";
+import { Task } from "@/app/types";
 import { useStorage } from "./use-storage";
 
+export const PAPER_BIN_STORAGE_KEY = "paper-bin";
+
 export const usePaperBin = () => {
-  const [deletedTasks, setDeletedTasks] = useStorage("paper-bin", []) as [
-    TaskList,
-    React.Dispatch<React.SetStateAction<TaskList>>,
-  ];
+  const [deletedTasks, setDeletedTasks] = useStorage(PAPER_BIN_STORAGE_KEY);
 
   const handleAddTask = (task: Task) => {
     setDeletedTasks((previousTasks) => [...previousTasks, task]);
