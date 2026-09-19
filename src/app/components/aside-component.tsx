@@ -17,7 +17,7 @@ export const AsideComponent = () => {
         aria-expanded={isExpanded}
         aria-label={isExpanded ? "Cerrar herramientas" : "Abrir herramientas"}
       >
-        <h2 className="aside-title">Aside</h2>
+        <h2 className="aside-title">Crud</h2>
       </button>
 
       <div className="aside-content">

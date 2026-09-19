@@ -163,7 +163,6 @@ p {
   align-self: stretch;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   transition:
     width var(--transition-normal),
     padding var(--transition-normal),
