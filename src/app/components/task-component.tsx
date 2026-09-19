@@ -50,7 +50,7 @@ export const TaskComponent = ({
             className="task-check-input"
             aria-label={`Marcar "${currentTask.title}" como completada`}
           />
-          <CheckIcon className="task-check-icon" width={12} height={12} />
+          <CheckIcon className="task-check-icon" size={12} strokeWidth={3} />
         </div>
 
         <div className="task-text-label">
@@ -72,7 +72,7 @@ export const TaskComponent = ({
         onClick={handleDelete}
         aria-label={`Eliminar ${currentTask.title}`}
       >
-        <TrashIcon width={16} height={16} strokeWidth={1.5} />
+        <TrashIcon size={16} strokeWidth={1.7} />
       </button>
     </article>
   );

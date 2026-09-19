@@ -12,11 +12,11 @@ type MenuComponentProps = {
 };
 
 const MENU_ITEMS: { view: MenuView; label: string; icon: ReactNode }[] = [
-  { view: "tasks", label: "Tareas", icon: <CheckIcon width={15} height={15} /> },
+  { view: "tasks", label: "Tareas", icon: <CheckIcon size={18} strokeWidth={1.9} /> },
   {
     view: "paper-bin",
     label: "Papelera",
-    icon: <TrashIcon width={15} height={15} />,
+    icon: <TrashIcon size={18} strokeWidth={1.9} />,
   },
 ];
 

@@ -35,7 +35,7 @@ export const PaperBinComponent = ({
 						className="paper-bin-empty-button"
 						onClick={onEmpty}
 					>
-						<TrashIcon width={15} height={15} strokeWidth={1.7} />
+						<TrashIcon size={14} strokeWidth={1.9} />
 						Vaciar
 					</button>
 				)}
@@ -56,7 +56,7 @@ export const PaperBinComponent = ({
 									className="paper-bin-action"
 									onClick={() => onRestore(task)}
 								>
-									<CheckIcon width={15} height={15} strokeWidth={1.8} />
+									<CheckIcon size={14} strokeWidth={1.9} />
 									Restaurar
 								</button>
 								<button
@@ -64,7 +64,7 @@ export const PaperBinComponent = ({
 									className="paper-bin-action paper-bin-action-danger"
 									onClick={() => onDeletePermanently(task.id)}
 								>
-									<TrashIcon width={15} height={15} strokeWidth={1.7} />
+									<TrashIcon size={14} strokeWidth={1.9} />
 									Eliminar
 								</button>
 							</div>
