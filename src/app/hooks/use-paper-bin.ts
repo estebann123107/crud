@@ -7,7 +7,11 @@ export const usePaperBin = () => {
   const [deletedTasks, setDeletedTasks] = useStorage(PAPER_BIN_STORAGE_KEY);
 
   const handleAddTask = (task: Task) => {
-    setDeletedTasks((previousTasks) => [...previousTasks, task]);
+    setDeletedTasks((previousTasks) =>
+      previousTasks.some((previousTask) => previousTask.id === task.id)
+        ? previousTasks
+        : [...previousTasks, task],
+    );
   };
 
   const handleRestoreTask = (taskId: string) => {
