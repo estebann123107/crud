@@ -8,10 +8,4 @@ export type TaskList = Task[];
 
 export type MenuView = "tasks" | "paper-bin";
 
-export type IconProps = {
-    width?: number
-    height?:number
-    strokeWidth?: number
-    color?: string
-    className?: string
-}
+export type Theme = "light" | "dark";

@@ -10,25 +10,24 @@ import { Task } from '@/app/types';
 
 const EXIT_DURATION = 180;
 
-export const useTask = (task: Task, onDelete: () => void) => {
-    const [currentTask, setCurrentTask] = useState<Task>(task);
+type UseTaskOptions = {
+    task: Task;
+    onChange: (changes: Partial<Task>) => void;
+    onDelete: () => void;
+};
+
+export const useTask = ({ task, onChange, onDelete }: UseTaskOptions) => {
     const [isRemoving, setIsRemoving] = useState(false);
     const textRef = useRef<HTMLTextAreaElement>(null);
     const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const toggleTaskCompletion = () => {
-        setCurrentTask((prevTask) => ({
-            ...prevTask,
-            completed: !prevTask.completed,
-        }));
+        onChange({ completed: !task.completed });
     };
 
     const updateTaskTitle = (newTitle: string) => {
-        setCurrentTask((prevTask) => ({
-            ...prevTask,
-            title: newTitle,
-        }));
-    }
+        onChange({ title: newTitle });
+    };
 
     const autoResize = useCallback(() => {
         const element = textRef.current;
@@ -38,7 +37,7 @@ export const useTask = (task: Task, onDelete: () => void) => {
         element.style.height = `${element.scrollHeight}px`;
     }, []);
 
-    useLayoutEffect(autoResize, [autoResize, currentTask.title]);
+    useLayoutEffect(autoResize, [autoResize, task.title]);
 
     useEffect(() => {
         window.addEventListener('resize', autoResize);
@@ -64,7 +63,6 @@ export const useTask = (task: Task, onDelete: () => void) => {
     };
 
     return {
-        currentTask,
         toggleTaskCompletion,
         updateTaskTitle,
         textRef,

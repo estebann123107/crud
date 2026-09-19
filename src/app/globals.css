@@ -12,6 +12,8 @@
   /* Acento — se usa poco y a propósito */
   --color-accent: #4f5bd5;
   --color-accent-hover: #414ec4;
+  /* Para texto sobre accent-soft: el acento plano no llega a 4.5:1 */
+  --color-accent-strong: #3a42a8;
   --color-accent-soft: #eef0fc;
   --color-accent-ring: rgba(79, 91, 213, 0.22);
 
@@ -19,16 +21,21 @@
   --color-bg-app: #f6f7f9;
   --color-bg-surface: #ffffff;
   --color-bg-subtle: #f9fafb;
+  --color-bg-sunken: #f1f3f6;
   --color-border: #e6e8ec;
   --color-border-strong: #d3d7de;
+  --color-scrim: rgba(17, 24, 39, 0.48);
 
-  /* Texto */
+  /* Texto — los tres tonos pasan 4.5:1 sobre surface y sobre subtle */
   --color-text-main: #1c1f26;
-  --color-text-muted: #6b7280;
-  --color-text-faint: #9ca3af;
+  --color-text-muted: #4b5563;
+  --color-text-faint: #6b7280;
   --color-text-on-accent: #ffffff;
 
   --color-danger: #d1495b;
+  --color-danger-text: #a8374a;
+  --color-danger-soft: #fdf0f2;
+  --color-danger-border: #f3c8cf;
 
   /* Tipografía */
   --font-family-base:
@@ -53,16 +60,40 @@
   --spacing-5: 1.25rem;
   --spacing-6: 1.5rem;
   --spacing-8: 2rem;
+  --spacing-12: 3rem;
 
   /* Radios */
   --radius-sm: 8px;
   --radius-md: 10px;
-  --radius-lg: 14px;
+  --radius-lg: 12px;
   --radius-full: 9999px;
 
   /* Sombras — apenas perceptibles */
   --shadow-xs: 0 1px 2px rgba(16, 24, 40, 0.04);
   --shadow-sm: 0 1px 3px rgba(16, 24, 40, 0.06), 0 1px 2px rgba(16, 24, 40, 0.04);
+  --shadow-md: 0 6px 16px rgba(16, 24, 40, 0.16);
+  --shadow-lg: 0 16px 48px rgba(16, 24, 40, 0.24);
+
+  /* Iconos y altos de control — antes iban a mano en cada llamada */
+  --icon-sm: 14px;
+  --icon-md: 18px;
+  --icon-lg: 20px;
+
+  --control-sm: 2rem; /* 32px */
+  --control-md: 2.5rem; /* 40px */
+  --control-lg: 2.75rem; /* 44px */
+  --tap-min: 2.75rem; /* mínimo táctil */
+
+  /* Estructura */
+  --aside-width: 264px;
+  --aside-rail-width: 72px;
+  --drawer-width: 288px;
+  --content-max: 640px;
+
+  /* Apilado */
+  --z-scrim: 30;
+  --z-drawer: 40;
+  --z-tooltip: 50;
 
   /* Movimiento */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
@@ -74,23 +105,35 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --color-accent: #7b87ea;
-  --color-accent-hover: #8d98f0;
+  --color-accent: #8d98f0;
+  --color-accent-hover: #a6aef5;
+  --color-accent-strong: #a6aef5;
   --color-accent-soft: #23263a;
-  --color-accent-ring: rgba(123, 135, 234, 0.28);
+  --color-accent-ring: rgba(141, 152, 240, 0.32);
 
   --color-bg-app: #121317;
   --color-bg-surface: #1a1c21;
   --color-bg-subtle: #1f2127;
+  --color-bg-sunken: #16181c;
   --color-border: #2a2d34;
   --color-border-strong: #3a3e47;
+  --color-scrim: rgba(0, 0, 0, 0.6);
 
   --color-text-main: #e8eaed;
-  --color-text-muted: #9aa0aa;
-  --color-text-faint: #6f757f;
+  --color-text-muted: #a8aeb8;
+  --color-text-faint: #8b929c;
+  /* El acento oscuro es claro: el texto encima va oscuro, no blanco */
+  --color-text-on-accent: #16181c;
+
+  --color-danger: #f2879a;
+  --color-danger-text: #f2879a;
+  --color-danger-soft: #2a1e22;
+  --color-danger-border: #5a2b35;
 
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
 }
 
 /* ------------------------------------------------------------
@@ -135,91 +178,334 @@ p {
 }
 
 /* ------------------------------------------------------------
-   3. ESTRUCTURA
+   2b. PRIMITIVAS
    ------------------------------------------------------------ */
-.todo-page {
-  min-height: 100dvh;
-  padding: clamp(1.5rem, 6vw, 5rem) var(--spacing-4);
-  display: flex;
-  align-items: stretch;
-  gap: var(--spacing-5);
-}
-
-.todo-panel {
-  flex: 1;
-  width: min(100%, 560px);
-  margin: 0;
-}
-
-.aside {
-  flex: 0 0 auto;
-  width: clamp(180px, 24vw, 320px);
-  min-width: 160px;
-  padding: var(--spacing-4) var(--spacing-5);
-  background: var(--color-bg-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xs);
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  transition:
-    width var(--transition-normal),
-    padding var(--transition-normal),
-    box-shadow var(--transition-normal);
-}
-
-.aside-toggle {
-  width: 100%;
-  padding: 0;
-  background: transparent;
-  border: 0;
-  color: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.aside-title {
-  margin: 0;
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  height: var(--control-md);
+  padding-inline: var(--spacing-4);
   color: var(--color-text-main);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-}
-
-.aside-content {
-  overflow: hidden;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
   transition:
-    max-height var(--transition-normal),
-    opacity var(--transition-normal),
-    margin-top var(--transition-normal);
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
-.aside-content p {
-  margin: 0;
+.btn:disabled {
+  cursor: not-allowed;
+}
+
+/* El radio sigue al tamaño; radius-full se reserva para lo circular */
+.btn-sm {
+  height: var(--control-sm);
+  padding-inline: var(--spacing-3);
+  border-radius: var(--radius-sm);
+}
+
+.btn-lg {
+  height: var(--control-lg);
+  padding-inline: var(--spacing-5);
+  font-size: var(--font-size-base);
+}
+
+.btn-primary {
+  color: var(--color-text-on-accent);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+
+.btn-primary:disabled {
+  color: var(--color-text-faint);
+  background: var(--color-bg-sunken);
+  border-color: var(--color-border);
+}
+
+.btn-secondary {
+  color: var(--color-text-main);
+  background: var(--color-bg-surface);
+  border-color: var(--color-border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--color-bg-subtle);
+  border-color: var(--color-border-strong);
+}
+
+.btn-ghost {
+  color: var(--color-text-muted);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  color: var(--color-text-main);
+  background: var(--color-bg-sunken);
+}
+
+.btn-danger {
+  color: var(--color-danger-text);
+  background: var(--color-danger-soft);
+  border-color: var(--color-danger-border);
+}
+
+.btn-danger:hover:not(:disabled) {
+  border-color: var(--color-danger);
+}
+
+.btn-icon {
+  width: var(--control-md);
+  padding: 0;
+}
+
+.btn-icon.btn-sm {
+  width: var(--control-sm);
+}
+
+.btn-icon.btn-lg {
+  width: var(--control-lg);
+}
+
+/* Un solo estado vacío para la lista y para la papelera */
+.empty-state {
+  display: grid;
+  justify-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-8) var(--spacing-4);
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
-  line-height: 1.6;
+  text-align: center;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  animation: appear 200ms var(--ease) both;
+}
+
+.empty-state-icon {
+  color: var(--color-text-faint);
+}
+
+.empty-state-hint {
+  color: var(--color-text-faint);
 }
 
 /* ------------------------------------------------------------
-   3b. MENÚ — ítem
+   3. ARMAZÓN
    ------------------------------------------------------------ */
+.app-shell {
+  min-height: 100dvh;
+  display: flex;
+  align-items: stretch;
+}
+
+.app-content {
+  flex: 1;
+  min-width: 0;
+  padding: var(--spacing-12) var(--spacing-6);
+  display: flex;
+  justify-content: center;
+}
+
+.view {
+  width: 100%;
+  max-width: var(--content-max);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+/* ------------------------------------------------------------
+   3b. ASIDE — cromo de la aplicación, no una tarjeta flotante
+   ------------------------------------------------------------ */
+.aside {
+  --rail-gutter: calc((var(--aside-rail-width) - var(--tap-min)) / 2);
+
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  flex: 0 0 auto;
+  width: var(--aside-width);
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-surface);
+  border-right: 1px solid var(--color-border);
+  transition: width var(--transition-normal);
+}
+
+.aside-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  height: 4rem;
+  padding-inline: var(--spacing-5) var(--spacing-3);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.aside-mark {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--color-text-on-accent);
+  background: var(--color-accent);
+  border-radius: 9px;
+}
+
+.aside-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--color-text-main);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.012em;
+  white-space: nowrap;
+}
+
+.aside-collapse {
+  flex: 0 0 auto;
+  color: var(--color-text-faint);
+}
+
+.aside-collapse:hover {
+  color: var(--color-text-main);
+  background: var(--color-bg-sunken);
+}
+
+.aside-footer {
+  margin-top: auto;
+  padding: var(--spacing-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.aside-item {
+  justify-content: flex-start;
+  width: 100%;
+  padding-inline: var(--spacing-3);
+}
+
+.aside-item-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.aside-note {
+  margin: var(--spacing-2) 0 var(--spacing-1) var(--spacing-3);
+  color: var(--color-text-faint);
+  font-size: var(--font-size-xs);
+}
+
+/* Fuera del móvil el aside no flota: estos tres controles no existen */
+.aside-trigger,
+.aside-close,
+.aside-scrim {
+  display: none;
+}
+
+/* ------------------------------------------------------------
+   3c. ASIDE — riel contraído (sólo escritorio)
+   ------------------------------------------------------------ */
+@media (min-width: 761px) {
+  .aside.is-collapsed {
+    width: var(--aside-rail-width);
+  }
+
+  .aside.is-collapsed .aside-header {
+    flex-direction: column;
+    height: auto;
+    padding: var(--spacing-3) 0;
+  }
+
+  .aside.is-collapsed .aside-name,
+  .aside.is-collapsed .menu-label,
+  .aside.is-collapsed .menu-item-label,
+  .aside.is-collapsed .menu-item-count,
+  .aside.is-collapsed .aside-item-label,
+  .aside.is-collapsed .aside-note {
+    display: none;
+  }
+
+  .aside.is-collapsed .menu,
+  .aside.is-collapsed .aside-footer {
+    padding-inline: var(--rail-gutter);
+  }
+
+  .aside.is-collapsed .menu-item-button,
+  .aside.is-collapsed .aside-item {
+    width: var(--tap-min);
+    height: var(--tap-min);
+    justify-content: center;
+    padding-inline: 0;
+    border-radius: var(--radius-lg);
+  }
+
+  .aside.is-collapsed .menu-item-button.is-active::before {
+    left: calc(var(--rail-gutter) * -1);
+  }
+}
+
+/* ------------------------------------------------------------
+   3d. MENÚ
+   ------------------------------------------------------------ */
+.menu {
+  padding: var(--spacing-4) var(--spacing-3) 0;
+}
+
+.menu-label {
+  margin: 0 0 var(--spacing-2) var(--spacing-3);
+  color: var(--color-text-faint);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.menu-list {
+  display: grid;
+  gap: 2px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
 .menu-item {
   list-style: none;
 }
 
 .menu-item-button {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
   width: 100%;
-  padding: var(--spacing-2) var(--spacing-3);
+  height: var(--control-md);
+  padding-inline: var(--spacing-3);
   color: var(--color-text-muted);
   background: transparent;
   border: 0;
   border-radius: var(--radius-md);
   cursor: pointer;
   font: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
   text-align: left;
   transition:
     color var(--transition-fast),
@@ -228,45 +514,51 @@ p {
 
 .menu-item-button:hover {
   color: var(--color-text-main);
-  background: var(--color-bg-subtle);
+  background: var(--color-bg-sunken);
 }
 
 .menu-item-button.is-active {
-  color: var(--color-accent);
+  color: var(--color-accent-strong);
   background: var(--color-accent-soft);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* La barra del activo se apoya en el borde del aside */
+.menu-item-button.is-active::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--spacing-3) * -1);
+  top: 50%;
+  width: 3px;
+  height: 1.25rem;
+  transform: translateY(-50%);
+  background: var(--color-accent);
+  border-radius: 0 3px 3px 0;
 }
 
 .menu-item-label {
+  flex: 1;
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.menu-item-count {
+  flex: 0 0 auto;
+  font-size: var(--font-size-xs);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ------------------------------------------------------------
-   3c. MENÚ — contenedor
+   4. CABECERA DE VISTA — compartida por lista y papelera
    ------------------------------------------------------------ */
-.menu {
-  margin-top: var(--spacing-2);
+.view-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
 }
 
-.menu-list {
-  display: grid;
-  gap: var(--spacing-1);
-  padding: 0;
-  margin: 0;
-}
-
-/* ------------------------------------------------------------
-   4. HEADER
-   ------------------------------------------------------------ */
-.todo-header {
-  padding-bottom: var(--spacing-5);
-  margin-bottom: var(--spacing-5);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.eyebrow {
-  margin-bottom: var(--spacing-3);
+.view-eyebrow {
   color: var(--color-text-faint);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
@@ -274,74 +566,72 @@ p {
   text-transform: uppercase;
 }
 
-/* Título y contador comparten línea base */
-.title-row {
+.view-title-row {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: var(--spacing-4);
 }
 
-.theme-toggle {
-  display: grid;
-  place-items: center;
-  flex: 0 0 auto;
-  width: 2.25rem;
-  height: 2.25rem;
-  padding: 0;
-  color: var(--color-text-muted);
-  background: var(--color-bg-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  font-size: 1.1rem;
-  line-height: 1;
-  transition:
-    color var(--transition-fast),
-    border-color var(--transition-fast),
-    background-color var(--transition-fast);
-}
-
-.theme-toggle:hover {
-  color: var(--color-text-main);
-  background: var(--color-bg-subtle);
-  border-color: var(--color-border-strong);
-}
-
-.todo-title {
+.view-title {
   font-size: var(--font-size-title);
   font-weight: var(--font-weight-semibold);
   letter-spacing: -0.035em;
   line-height: 1.1;
 }
 
-/* El único acento del encabezado */
-.title-dot {
+.view-title-dot {
   color: var(--color-accent);
 }
 
-.task-count {
-  flex: 0 0 auto;
+.view-meta {
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
 }
 
-.task-count-number {
+.numeric {
   color: var(--color-text-main);
   font-weight: var(--font-weight-medium);
   font-variant-numeric: tabular-nums;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.progress-track {
+  flex: 0 0 auto;
+  width: 7.5rem;
+  height: 4px;
+  overflow: hidden;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+}
+
+.progress-value {
+  height: 100%;
+  background: var(--color-accent);
+  border-radius: var(--radius-full);
+  transition: inline-size var(--transition-normal);
+}
+
+.progress-label {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
 }
 
 /* ------------------------------------------------------------
    5. FORMULARIO
    ------------------------------------------------------------ */
 .add-task-form {
-  margin-bottom: var(--spacing-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
 }
 
 .add-task-form label {
-  display: block;
-  margin-bottom: var(--spacing-2);
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
@@ -379,31 +669,6 @@ p {
 .new-task-input:focus {
   border-color: var(--color-accent);
   box-shadow: 0 0 0 3px var(--color-accent-ring);
-}
-
-.add-button {
-  flex: 0 0 auto;
-  padding-inline: var(--spacing-5);
-  color: var(--color-text-on-accent);
-  background: var(--color-accent);
-  border: 1px solid var(--color-accent);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  font: inherit;
-  font-weight: var(--font-weight-medium);
-  transition: background-color var(--transition-fast);
-}
-
-.add-button:hover {
-  background: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
-}
-
-.add-button:disabled {
-  color: var(--color-text-faint);
-  background: var(--color-bg-subtle);
-  border-color: var(--color-border);
-  cursor: not-allowed;
 }
 
 /* Los campos de texto traen su propio anillo de foco (borde + box-shadow),
@@ -555,100 +820,26 @@ button:focus-visible,
 }
 
 /* ---- Eliminar ---- */
+/* Modificador de .btn-icon: se alinea con la primera línea del texto */
 .delete-button {
-  display: grid;
-  place-items: center;
   flex: 0 0 auto;
-  width: 1.75rem;
-  height: 1.875rem; /* alinea con la primera línea del texto */
-  padding: 0;
+  width: var(--control-sm);
+  height: 1.875rem;
   color: var(--color-text-faint);
-  background: transparent;
-  border: 0;
   border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition:
-    color var(--transition-fast),
-    background-color var(--transition-fast);
 }
 
 .delete-button:hover {
   color: var(--color-danger);
-  background: var(--color-bg-subtle);
+  background: var(--color-bg-sunken);
 }
 
 /* ------------------------------------------------------------
    7. ESTADO VACÍO
    ------------------------------------------------------------ */
-.empty-list {
-  padding: var(--spacing-8) var(--spacing-4);
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-  text-align: center;
-  border: 1px dashed var(--color-border-strong);
-  border-radius: var(--radius-lg);
-  animation: appear 200ms var(--ease) both;
-}
-
 /* ------------------------------------------------------------
    8. PAPELERA
    ------------------------------------------------------------ */
-.paper-bin {
-  display: grid;
-  gap: var(--spacing-4);
-}
-
-.paper-bin-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: var(--spacing-3);
-}
-
-.paper-bin-title {
-  margin: 0;
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-}
-
-.paper-bin-count {
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-}
-
-.paper-bin-empty-button,
-.paper-bin-action {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-2) var(--spacing-3);
-  color: var(--color-text-muted);
-  background: transparent;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font: inherit;
-  font-size: var(--font-size-sm);
-  transition:
-    color var(--transition-fast),
-    border-color var(--transition-fast),
-    background-color var(--transition-fast);
-}
-
-.paper-bin-empty-button:hover,
-.paper-bin-action:hover {
-  color: var(--color-text-main);
-  background: var(--color-bg-subtle);
-  border-color: var(--color-border-strong);
-}
-
-.paper-bin-empty-button:focus-visible,
-.paper-bin-action:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
 .paper-bin-list {
   display: grid;
   gap: var(--spacing-2);
@@ -680,19 +871,6 @@ button:focus-visible,
   flex: 0 0 auto;
   align-items: center;
   gap: var(--spacing-2);
-}
-
-.paper-bin-action-danger:hover {
-  color: var(--color-danger);
-}
-
-.paper-bin-empty {
-  padding: var(--spacing-8) var(--spacing-4);
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-  text-align: center;
-  border: 1px dashed var(--color-border-strong);
-  border-radius: var(--radius-lg);
 }
 
 @media (max-width: 560px) {
@@ -728,59 +906,74 @@ button:focus-visible,
 }
 
 /* ------------------------------------------------------------
-   9. RESPONSIVE
+   10. RESPONSIVE
    ------------------------------------------------------------ */
 @media (max-width: 760px) {
-  .todo-page {
-    gap: var(--spacing-4);
-    padding: var(--spacing-6) var(--spacing-4);
+  /* El aside deja de ocupar columna: se abre como cajón sobre un velo */
+  .app-content {
+    padding: calc(var(--tap-min) + var(--spacing-6)) var(--spacing-4)
+      var(--spacing-6);
+  }
+
+  .aside-trigger {
+    position: fixed;
+    left: var(--spacing-3);
+    top: var(--spacing-3);
+    z-index: var(--z-drawer);
+    display: inline-flex;
+    box-shadow: var(--shadow-xs);
+  }
+
+  .aside-close {
+    display: inline-flex;
+    flex: 0 0 auto;
+    color: var(--color-text-muted);
+  }
+
+  .aside-collapse {
+    display: none;
+  }
+
+  .aside-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-scrim);
+    display: block;
+    padding: 0;
+    background: var(--color-scrim);
+    border: 0;
+    cursor: pointer;
+  }
+
+  .aside-scrim[hidden] {
+    display: none;
   }
 
   .aside {
-    position: relative;
-    width: 72px;
-    min-width: 72px;
-    height: 45px;
-    padding: var(--spacing-3) var(--spacing-2);
-    justify-content: flex-start;
-    overflow: hidden;
-  }
-
-  .aside-content {
-    max-height: 0;
-    margin-top: 0;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .aside.is-expanded {
     position: fixed;
-    left: var(--spacing-4);
-    top: var(--spacing-4);
-    bottom: var(--spacing-4);
-    z-index: 20;
-    width: min(82vw, 260px);
-    min-width: 0;
-    height: auto;
-    box-shadow: 0 18px 40px rgba(17, 24, 39, 0.18);
+    left: 0;
+    top: 0;
+    z-index: var(--z-drawer);
+    width: var(--drawer-width);
+    height: 100dvh;
+    box-shadow: var(--shadow-lg);
+    transform: translateX(-100%);
+    transition: transform var(--transition-normal);
   }
 
-  .aside.is-expanded .aside-content {
-    max-height: 220px;
-    margin-top: var(--spacing-2);
-    opacity: 1;
-    pointer-events: auto;
+  .aside.is-open {
+    transform: none;
+  }
+
+  .menu-item-button,
+  .aside-item {
+    height: var(--tap-min);
   }
 }
 
 @media (max-width: 560px) {
-  .todo-page {
-    padding: var(--spacing-6) var(--spacing-4);
-  }
-
-  .todo-header {
-    padding-bottom: var(--spacing-4);
-    margin-bottom: var(--spacing-4);
+  .view {
+    gap: var(--spacing-5);
   }
 
   .task-container {
@@ -789,11 +982,11 @@ button:focus-visible,
 }
 
 @media (max-width: 400px) {
-  .todo-title {
+  .view-title {
     font-size: 1.5rem;
   }
 
-  .title-row {
+  .view-title-row {
     align-items: flex-start;
     flex-direction: column;
     gap: var(--spacing-2);

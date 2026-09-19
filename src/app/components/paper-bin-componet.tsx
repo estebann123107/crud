@@ -1,8 +1,9 @@
 "use client";
 
 import { Task } from "@/app/types";
-import { CheckIcon } from "@/app/icons/check-icon";
+import { RotateCcwIcon } from "@/app/icons/rotate-ccw-icon";
 import { TrashIcon } from "@/app/icons/trash-icon";
+import { ViewHeaderComponent } from "./view-header-component";
 
 type PaperBinComponentProps = {
 	deletedTasks: Task[];
@@ -18,33 +19,37 @@ export const PaperBinComponent = ({
 	onEmpty,
 }: PaperBinComponentProps) => {
 	return (
-		<section className="paper-bin" aria-labelledby="paper-bin-title">
-			<div className="paper-bin-header">
-				<div>
-					<h2 id="paper-bin-title" className="paper-bin-title">
-						Papelera
-					</h2>
-					<p className="paper-bin-count">
-						{deletedTasks.length} {deletedTasks.length === 1 ? "tarea" : "tareas"}
+		<section className="view" aria-labelledby="paper-bin-title">
+			<ViewHeaderComponent
+				titleId="paper-bin-title"
+				eyebrow="Se borra al vaciar"
+				title="Papelera"
+				action={
+					deletedTasks.length > 0 ? (
+						<button
+							type="button"
+							className="btn btn-secondary btn-sm"
+							onClick={onEmpty}
+						>
+							<TrashIcon size={14} strokeWidth={1.9} />
+							Vaciar
+						</button>
+					) : undefined
+				}
+				meta={
+					<p className="view-meta">
+						<span className="numeric">{deletedTasks.length}</span>{" "}
+						{deletedTasks.length === 1 ? "tarea eliminada" : "tareas eliminadas"}
 					</p>
-				</div>
-
-				{deletedTasks.length > 0 && (
-					<button
-						type="button"
-						className="paper-bin-empty-button"
-						onClick={onEmpty}
-					>
-						<TrashIcon width={15} height={15} strokeWidth={1.7} />
-						Vaciar
-					</button>
-				)}
-			</div>
+				}
+			/>
 
 			{deletedTasks.length === 0 ? (
-				<p className="paper-bin-empty" role="status">
-					La papelera está vacía.
-				</p>
+				<div className="empty-state" role="status">
+					<TrashIcon className="empty-state-icon" size={22} strokeWidth={1.6} />
+					<p>La papelera está vacía.</p>
+					<p className="empty-state-hint">Lo que elimines aparecerá aquí.</p>
+				</div>
 			) : (
 				<ul className="paper-bin-list" aria-label="Tareas eliminadas">
 					{deletedTasks.map((task) => (
@@ -53,18 +58,18 @@ export const PaperBinComponent = ({
 							<div className="paper-bin-actions">
 								<button
 									type="button"
-									className="paper-bin-action"
+									className="btn btn-secondary btn-sm"
 									onClick={() => onRestore(task)}
 								>
-									<CheckIcon width={15} height={15} strokeWidth={1.8} />
+									<RotateCcwIcon size={14} strokeWidth={1.9} />
 									Restaurar
 								</button>
 								<button
 									type="button"
-									className="paper-bin-action paper-bin-action-danger"
+									className="btn btn-danger btn-sm"
 									onClick={() => onDeletePermanently(task.id)}
 								>
-									<TrashIcon width={15} height={15} strokeWidth={1.7} />
+									<TrashIcon size={14} strokeWidth={1.9} />
 									Eliminar
 								</button>
 							</div>

@@ -1,37 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-const THEME_STORAGE_KEY = "todo-theme";
+import { useTheme } from "@/app/hooks/use-theme";
+import { MoonIcon } from "@/app/icons/moon-icon";
+import { SunIcon } from "@/app/icons/sun-icon";
 
 export const ThemeToggle = () => {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
-    const darkMode = storedTheme === "dark";
-
-    document.documentElement.dataset.theme = darkMode ? "dark" : "light";
-    setIsDark(darkMode);
-  }, []);
-
-  const toggleTheme = () => {
-    const nextTheme = isDark ? "light" : "dark";
-
-    document.documentElement.dataset.theme = nextTheme;
-    window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
-    setIsDark(nextTheme === "dark");
-  };
+  const { isDark, toggleTheme } = useTheme();
+  const label = isDark ? "Modo claro" : "Modo oscuro";
 
   return (
     <button
       type="button"
-      className="theme-toggle"
+      className="btn btn-ghost aside-item"
       onClick={toggleTheme}
-      aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-      title={isDark ? "Modo claro" : "Modo oscuro"}
+      aria-pressed={isDark}
+      aria-label={label}
     >
-      <span aria-hidden="true">{isDark ? "☀" : "☾"}</span>
+      {isDark ? <SunIcon size={18} strokeWidth={1.9} /> : <MoonIcon size={18} strokeWidth={1.9} />}
+      <span className="aside-item-label">{label}</span>
     </button>
   );
 };

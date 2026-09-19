@@ -1,8 +1,6 @@
 "use client";
 
-import {
-  CSSProperties,
-} from "react";
+import { CSSProperties } from "react";
 import { useTask } from "@/app/hooks/use-task";
 import { Task } from "@/app/types";
 import { TrashIcon } from "@/app/icons/trash-icon";
@@ -10,24 +8,25 @@ import { CheckIcon } from "@/app/icons/check-icon";
 
 type TaskComponentProps = {
   currentTask: Task;
+  onChange: (changes: Partial<Task>) => void;
   onDelete: () => void;
   index?: number;
 };
 
 export const TaskComponent = ({
-  currentTask: task,
+  currentTask,
+  onChange,
   onDelete,
   index = 0,
 }: TaskComponentProps) => {
   const {
-    currentTask,
     updateTaskTitle,
     toggleTaskCompletion,
     textRef,
     handleDelete,
     handleKeyDown,
     isRemoving,
-  } = useTask(task, onDelete);
+  } = useTask({ task: currentTask, onChange, onDelete });
 
   const className = [
     "task-container",
@@ -36,6 +35,8 @@ export const TaskComponent = ({
   ]
     .filter(Boolean)
     .join(" ");
+
+  const titleInputId = `task-title-${currentTask.id}`;
 
   return (
     <article
@@ -51,12 +52,15 @@ export const TaskComponent = ({
             className="task-check-input"
             aria-label={`Marcar "${currentTask.title}" como completada`}
           />
-          <CheckIcon className="task-check-icon" width={12} height={12} />
+          <CheckIcon className="task-check-icon" size={12} strokeWidth={3} />
         </div>
 
         <div className="task-text-label">
-          <span className="sr-only">Título de la tarea</span>
+          <label className="sr-only" htmlFor={titleInputId}>
+            Título de la tarea
+          </label>
           <textarea
+            id={titleInputId}
             ref={textRef}
             value={currentTask.title}
             onChange={(event) => updateTaskTitle(event.target.value)}
@@ -69,11 +73,11 @@ export const TaskComponent = ({
 
       <button
         type="button"
-        className="delete-button"
+        className="btn btn-icon delete-button"
         onClick={handleDelete}
         aria-label={`Eliminar ${currentTask.title}`}
       >
-        <TrashIcon width={16} height={16} strokeWidth={1.5} />
+        <TrashIcon size={16} strokeWidth={1.7} />
       </button>
     </article>
   );
