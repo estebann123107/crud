@@ -1,5 +1,5 @@
 import { AsideComponent } from "./components/aside-component";
-import { TaskListComponent } from "./components/task-list-component";
+import { MainComponent } from "./components/main-component";
 import { ThemeToggle } from "./components/theme-toggle";
 
 export default function TodoView() {
@@ -19,7 +19,7 @@ export default function TodoView() {
             <ThemeToggle />
           </div>
         </header>
-        <TaskListComponent />
+        <MainComponent />
       </section>
     </main>
   );
