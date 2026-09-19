@@ -1,9 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useMenuView } from "@/app/hooks/use-menu-view";
+import { MenuComponent } from "./menu-component";
 
 export const AsideComponent = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const { view, setView } = useMenuView();
 
   return (
     <aside className={`aside ${isExpanded ? "is-expanded" : ""}`}>
@@ -18,7 +21,7 @@ export const AsideComponent = () => {
       </button>
 
       <div className="aside-content">
-        <p>This is the aside content.</p>
+        <MenuComponent activeView={view} onSelect={setView} />
       </div>
     </aside>
   );
