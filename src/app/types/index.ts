@@ -6,6 +6,8 @@ export interface Task {
 
 export type TaskList = Task[];
 
+export type MenuView = "tasks" | "paper-bin";
+
 export type IconProps = {
     width?: number
     height?:number
