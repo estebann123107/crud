@@ -73,7 +73,7 @@ export const TaskComponent = ({
 
       <button
         type="button"
-        className="delete-button"
+        className="btn btn-icon delete-button"
         onClick={handleDelete}
         aria-label={`Eliminar ${currentTask.title}`}
       >

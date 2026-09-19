@@ -10,7 +10,7 @@ export const ThemeToggle = () => {
   return (
     <button
       type="button"
-      className="theme-toggle"
+      className="btn btn-icon btn-secondary"
       onClick={toggleTheme}
       aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
       title={isDark ? "Modo claro" : "Modo oscuro"}

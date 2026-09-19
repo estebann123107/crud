@@ -1,6 +1,7 @@
 "use client";
 
 import { Task } from "@/app/types";
+import { ListTodoIcon } from "@/app/icons/list-todo-icon";
 import { useList } from "../hooks/use-list";
 import { TaskComponent } from "./task-component";
 
@@ -36,16 +37,24 @@ export const TaskListComponent = () => {
             placeholder="¿Qué necesitas hacer?"
             autoComplete="off"
           />
-          <button type="submit" className="add-button" disabled={!title}>
+          <button
+            type="submit"
+            className="btn btn-primary btn-lg"
+            disabled={!title}
+          >
             Añadir
           </button>
         </div>
       </form>
 
       {tasks.length === 0 ? (
-        <p className="empty-list" role="status">
-          No hay tareas pendientes. Añade la primera desde el campo de arriba.
-        </p>
+        <div className="empty-state" role="status">
+          <ListTodoIcon className="empty-state-icon" size={22} strokeWidth={1.6} />
+          <p>No hay tareas pendientes.</p>
+          <p className="empty-state-hint">
+            Añade la primera desde el campo de arriba.
+          </p>
+        </div>
       ) : (
         <section className="task-list" aria-label="Lista de tareas">
           {tasks.map((task: Task, index: number) => (

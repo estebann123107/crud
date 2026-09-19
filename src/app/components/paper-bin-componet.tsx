@@ -32,7 +32,7 @@ export const PaperBinComponent = ({
 				{deletedTasks.length > 0 && (
 					<button
 						type="button"
-						className="paper-bin-empty-button"
+						className="btn btn-secondary btn-sm"
 						onClick={onEmpty}
 					>
 						<TrashIcon size={14} strokeWidth={1.9} />
@@ -42,9 +42,13 @@ export const PaperBinComponent = ({
 			</div>
 
 			{deletedTasks.length === 0 ? (
-				<p className="paper-bin-empty" role="status">
-					La papelera está vacía.
-				</p>
+				<div className="empty-state" role="status">
+					<TrashIcon className="empty-state-icon" size={22} strokeWidth={1.6} />
+					<p>La papelera está vacía.</p>
+					<p className="empty-state-hint">
+						Lo que elimines aparecerá aquí.
+					</p>
+				</div>
 			) : (
 				<ul className="paper-bin-list" aria-label="Tareas eliminadas">
 					{deletedTasks.map((task) => (
@@ -53,7 +57,7 @@ export const PaperBinComponent = ({
 							<div className="paper-bin-actions">
 								<button
 									type="button"
-									className="paper-bin-action"
+									className="btn btn-secondary btn-sm"
 									onClick={() => onRestore(task)}
 								>
 									<RotateCcwIcon size={14} strokeWidth={1.9} />
@@ -61,7 +65,7 @@ export const PaperBinComponent = ({
 								</button>
 								<button
 									type="button"
-									className="paper-bin-action paper-bin-action-danger"
+									className="btn btn-danger btn-sm"
 									onClick={() => onDeletePermanently(task.id)}
 								>
 									<TrashIcon size={14} strokeWidth={1.9} />

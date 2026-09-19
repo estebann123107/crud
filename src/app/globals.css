@@ -178,6 +178,130 @@ p {
 }
 
 /* ------------------------------------------------------------
+   2b. PRIMITIVAS
+   ------------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  height: var(--control-md);
+  padding-inline: var(--spacing-4);
+  color: var(--color-text-main);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  transition:
+    color var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+}
+
+/* El radio sigue al tamaño; radius-full se reserva para lo circular */
+.btn-sm {
+  height: var(--control-sm);
+  padding-inline: var(--spacing-3);
+  border-radius: var(--radius-sm);
+}
+
+.btn-lg {
+  height: var(--control-lg);
+  padding-inline: var(--spacing-5);
+  font-size: var(--font-size-base);
+}
+
+.btn-primary {
+  color: var(--color-text-on-accent);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+
+.btn-primary:disabled {
+  color: var(--color-text-faint);
+  background: var(--color-bg-sunken);
+  border-color: var(--color-border);
+}
+
+.btn-secondary {
+  color: var(--color-text-main);
+  background: var(--color-bg-surface);
+  border-color: var(--color-border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--color-bg-subtle);
+  border-color: var(--color-border-strong);
+}
+
+.btn-ghost {
+  color: var(--color-text-muted);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  color: var(--color-text-main);
+  background: var(--color-bg-sunken);
+}
+
+.btn-danger {
+  color: var(--color-danger-text);
+  background: var(--color-danger-soft);
+  border-color: var(--color-danger-border);
+}
+
+.btn-danger:hover:not(:disabled) {
+  border-color: var(--color-danger);
+}
+
+.btn-icon {
+  width: var(--control-md);
+  padding: 0;
+}
+
+.btn-icon.btn-sm {
+  width: var(--control-sm);
+}
+
+.btn-icon.btn-lg {
+  width: var(--control-lg);
+}
+
+/* Un solo estado vacío para la lista y para la papelera */
+.empty-state {
+  display: grid;
+  justify-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-8) var(--spacing-4);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  animation: appear 200ms var(--ease) both;
+}
+
+.empty-state-icon {
+  color: var(--color-text-faint);
+}
+
+.empty-state-hint {
+  color: var(--color-text-faint);
+}
+
+/* ------------------------------------------------------------
    3. ESTRUCTURA
    ------------------------------------------------------------ */
 .todo-page {
@@ -325,32 +449,6 @@ p {
   gap: var(--spacing-4);
 }
 
-.theme-toggle {
-  display: grid;
-  place-items: center;
-  flex: 0 0 auto;
-  width: 2.25rem;
-  height: 2.25rem;
-  padding: 0;
-  color: var(--color-text-muted);
-  background: var(--color-bg-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  font-size: 1.1rem;
-  line-height: 1;
-  transition:
-    color var(--transition-fast),
-    border-color var(--transition-fast),
-    background-color var(--transition-fast);
-}
-
-.theme-toggle:hover {
-  color: var(--color-text-main);
-  background: var(--color-bg-subtle);
-  border-color: var(--color-border-strong);
-}
-
 .todo-title {
   font-size: var(--font-size-title);
   font-weight: var(--font-weight-semibold);
@@ -422,31 +520,6 @@ p {
 .new-task-input:focus {
   border-color: var(--color-accent);
   box-shadow: 0 0 0 3px var(--color-accent-ring);
-}
-
-.add-button {
-  flex: 0 0 auto;
-  padding-inline: var(--spacing-5);
-  color: var(--color-text-on-accent);
-  background: var(--color-accent);
-  border: 1px solid var(--color-accent);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  font: inherit;
-  font-weight: var(--font-weight-medium);
-  transition: background-color var(--transition-fast);
-}
-
-.add-button:hover {
-  background: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
-}
-
-.add-button:disabled {
-  color: var(--color-text-faint);
-  background: var(--color-bg-subtle);
-  border-color: var(--color-border);
-  cursor: not-allowed;
 }
 
 /* Los campos de texto traen su propio anillo de foco (borde + box-shadow),
@@ -598,41 +671,23 @@ button:focus-visible,
 }
 
 /* ---- Eliminar ---- */
+/* Modificador de .btn-icon: se alinea con la primera línea del texto */
 .delete-button {
-  display: grid;
-  place-items: center;
   flex: 0 0 auto;
-  width: 1.75rem;
-  height: 1.875rem; /* alinea con la primera línea del texto */
-  padding: 0;
+  width: var(--control-sm);
+  height: 1.875rem;
   color: var(--color-text-faint);
-  background: transparent;
-  border: 0;
   border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition:
-    color var(--transition-fast),
-    background-color var(--transition-fast);
 }
 
 .delete-button:hover {
   color: var(--color-danger);
-  background: var(--color-bg-subtle);
+  background: var(--color-bg-sunken);
 }
 
 /* ------------------------------------------------------------
    7. ESTADO VACÍO
    ------------------------------------------------------------ */
-.empty-list {
-  padding: var(--spacing-8) var(--spacing-4);
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-  text-align: center;
-  border: 1px dashed var(--color-border-strong);
-  border-radius: var(--radius-lg);
-  animation: appear 200ms var(--ease) both;
-}
-
 /* ------------------------------------------------------------
    8. PAPELERA
    ------------------------------------------------------------ */
@@ -657,39 +712,6 @@ button:focus-visible,
 .paper-bin-count {
   color: var(--color-text-muted);
   font-size: var(--font-size-sm);
-}
-
-.paper-bin-empty-button,
-.paper-bin-action {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-2);
-  padding: var(--spacing-2) var(--spacing-3);
-  color: var(--color-text-muted);
-  background: transparent;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font: inherit;
-  font-size: var(--font-size-sm);
-  transition:
-    color var(--transition-fast),
-    border-color var(--transition-fast),
-    background-color var(--transition-fast);
-}
-
-.paper-bin-empty-button:hover,
-.paper-bin-action:hover {
-  color: var(--color-text-main);
-  background: var(--color-bg-subtle);
-  border-color: var(--color-border-strong);
-}
-
-.paper-bin-empty-button:focus-visible,
-.paper-bin-action:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
 }
 
 .paper-bin-list {
@@ -723,19 +745,6 @@ button:focus-visible,
   flex: 0 0 auto;
   align-items: center;
   gap: var(--spacing-2);
-}
-
-.paper-bin-action-danger:hover {
-  color: var(--color-danger);
-}
-
-.paper-bin-empty {
-  padding: var(--spacing-8) var(--spacing-4);
-  color: var(--color-text-muted);
-  font-size: var(--font-size-sm);
-  text-align: center;
-  border: 1px dashed var(--color-border-strong);
-  border-radius: var(--radius-lg);
 }
 
 @media (max-width: 560px) {
