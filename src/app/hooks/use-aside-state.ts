@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from "react";
 
 const STORAGE_KEY = "todo-aside-expanded";
-const DEFAULT_EXPANDED = false;
+const DEFAULT_EXPANDED = true;
 
 const listeners = new Set<() => void>();
 
