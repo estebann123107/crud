@@ -2,7 +2,7 @@
 
 import { ReactNode } from "react";
 import { MenuView } from "@/app/types";
-import { CheckIcon } from "@/app/icons/check-icon";
+import { ListTodoIcon } from "@/app/icons/list-todo-icon";
 import { TrashIcon } from "@/app/icons/trash-icon";
 import { MenuItemComponent } from "./menu-item-component";
 
@@ -12,7 +12,11 @@ type MenuComponentProps = {
 };
 
 const MENU_ITEMS: { view: MenuView; label: string; icon: ReactNode }[] = [
-  { view: "tasks", label: "Tareas", icon: <CheckIcon size={18} strokeWidth={1.9} /> },
+  {
+    view: "tasks",
+    label: "Tareas",
+    icon: <ListTodoIcon size={18} strokeWidth={1.9} />,
+  },
   {
     view: "paper-bin",
     label: "Papelera",

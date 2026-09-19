@@ -1,7 +1,7 @@
 "use client";
 
 import { Task } from "@/app/types";
-import { CheckIcon } from "@/app/icons/check-icon";
+import { RotateCcwIcon } from "@/app/icons/rotate-ccw-icon";
 import { TrashIcon } from "@/app/icons/trash-icon";
 
 type PaperBinComponentProps = {
@@ -56,7 +56,7 @@ export const PaperBinComponent = ({
 									className="paper-bin-action"
 									onClick={() => onRestore(task)}
 								>
-									<CheckIcon size={14} strokeWidth={1.9} />
+									<RotateCcwIcon size={14} strokeWidth={1.9} />
 									Restaurar
 								</button>
 								<button
