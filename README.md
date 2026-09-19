@@ -1,37 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CRUD - Gestor de tareas
 
-## Getting Started
-todo list app
+Aplicación web para organizar actividades diarias con una interfaz moderna, ligera y funcional. Este proyecto permite crear tareas, editarlas, marcarlas como completadas, eliminarlas y recuperarlas desde una papelera antes de eliminarlas definitivamente.
 
-First, run the development server:
+## Descripción del proyecto
 
-```bash
+La aplicación funciona como un gestor de tareas personal, pensado para mantener el control de pendientes en un solo lugar. Su flujo principal se basa en un modelo CRUD, donde el usuario puede:
+
+- Crear nuevas tareas.
+- Editar el nombre de cada tarea en línea.
+- Marcar tareas como completadas o pendientes.
+- Eliminar tareas y enviarlas a la papelera.
+- Restaurar elementos eliminados.
+- Vaciar la papelera de forma permanente.
+- Guardar la información localmente en el navegador.
+- Cambiar entre modo claro y modo oscuro.
+
+## Características principales
+
+- Arquitectura con Next.js y React.
+- Interfaz de usuario enfocada en productividad y claridad visual.
+- Barras laterales para navegar entre tareas y papelera.
+- Conteo dinámico de tareas activas.
+- Estado vacío con mensaje amigable cuando no hay pendientes.
+- Persistencia de datos usando localStorage.
+- Tema oscuro/claro con preferencia guardada por el usuario.
+- Diseño responsive para distintos tamaños de pantalla.
+- Animación suave en la eliminación de tareas.
+
+## Tecnologías utilizadas
+
+- Next.js 16
+- React 19
+- TypeScript
+- CSS Modules y CSS global
+- localStorage para almacenamiento local
+
+## Requisitos para su funcionamiento
+
+Antes de iniciar el proyecto, asegúrate de tener instalado:
+
+- Node.js 20 o superior
+- npm o Bun
+
+## Instalación
+
+1. Clona el repositorio.
+2. Entra a la carpeta del proyecto.
+3. Instala las dependencias:
+
+   npm install
+
+   o si prefieres Bun:
+
+   bun install
+
+## Ejecución
+
+### Modo desarrollo
+
 npm run juju
-# or
-yarn juju
-# or
-pnpm juju
-# or
-bun juju
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+o con Bun:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+bun run juju
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Luego abre tu navegador en:
 
-## Learn More
+http://localhost:3000
 
-To learn more about Next.js, take a look at the following resources:
+### Compilar para producción
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+npm run build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Ejecutar la versión compilada
 
-## Deploy on Vercel
+npm run start
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Configuración relevante del proyecto
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+El proyecto no requiere un archivo .env para funcionar en su estado actual. La configuración principal se encuentra en estos archivos:
+
+- package.json: scripts y dependencias del proyecto.
+- next.config.ts: configuración general de Next.js.
+- tsconfig.json: configuración de TypeScript y alias de rutas.
+- src/app/globals.css: estilos visuales del sistema y tema oscuro/claro.
+
+La aplicación usa almacenamiento local del navegador para conservar tareas y papelera sin necesidad de backend.
+
+## Estructura general del proyecto
+
+- src/app/components: componentes de interfaz.
+- src/app/hooks: lógica reutilizable como tareas, almacenamiento y papelera.
+- src/app/types: definiciones de tipos TypeScript.
+- src/app/icons: iconos reutilizables.
+
+## Integrantes del proyecto
+
+- Esteban Meléndez
+- Santiago Torregroza
+- Sebastián Torregroza
+- Gisell Falcón
+
+## Nota
+
+Este proyecto está pensado como un gestor personal de tareas con una experiencia simple, visualmente limpia y funcional en el navegador.
