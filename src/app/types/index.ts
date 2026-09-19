@@ -7,3 +7,5 @@ export interface Task {
 export type TaskList = Task[];
 
 export type MenuView = "tasks" | "paper-bin";
+
+export type Theme = "light" | "dark";
