@@ -1,8 +1,6 @@
 "use client";
 
-import {
-  CSSProperties,
-} from "react";
+import { CSSProperties } from "react";
 import { useTask } from "@/app/hooks/use-task";
 import { Task } from "@/app/types";
 import { TrashIcon } from "@/app/icons/trash-icon";
@@ -10,24 +8,25 @@ import { CheckIcon } from "@/app/icons/check-icon";
 
 type TaskComponentProps = {
   currentTask: Task;
+  onChange: (changes: Partial<Task>) => void;
   onDelete: () => void;
   index?: number;
 };
 
 export const TaskComponent = ({
-  currentTask: task,
+  currentTask,
+  onChange,
   onDelete,
   index = 0,
 }: TaskComponentProps) => {
   const {
-    currentTask,
     updateTaskTitle,
     toggleTaskCompletion,
     textRef,
     handleDelete,
     handleKeyDown,
     isRemoving,
-  } = useTask(task, onDelete);
+  } = useTask({ task: currentTask, onChange, onDelete });
 
   const className = [
     "task-container",

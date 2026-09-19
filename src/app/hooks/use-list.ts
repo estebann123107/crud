@@ -15,6 +15,14 @@ export const useList = () => {
         setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId))
     }
 
+    const handleUpdateTask = (taskId: string, changes: Partial<Task>) => {
+        setTasks((prevTasks) =>
+            prevTasks.map((task) =>
+                task.id === taskId ? { ...task, ...changes } : task
+            )
+        )
+    }
+
     const findTaskById = (taskId: string): Task | undefined => {
         return tasks.find((task) => task.id === taskId)
     }
@@ -39,6 +47,7 @@ export const useList = () => {
         tasks,
         handleAddTask,
         handleDeleteTask,
+        handleUpdateTask,
         findTaskById,
         newTaskTitle,
         updateNewTaskTitle: setNewTaskTitle,

@@ -8,6 +8,7 @@ export const TaskListComponent = () => {
   const {
     tasks,
     handleDeleteTask,
+    handleUpdateTask,
     newTaskTitle,
     updateNewTaskTitle,
     inputRef,
@@ -52,6 +53,7 @@ export const TaskListComponent = () => {
               key={task.id}
               currentTask={task}
               index={index}
+              onChange={(changes) => handleUpdateTask(task.id, changes)}
               onDelete={() => handleDeleteTask(task.id)}
             />
           ))}
