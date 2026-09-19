@@ -6,16 +6,18 @@ import { SunIcon } from "@/app/icons/sun-icon";
 
 export const ThemeToggle = () => {
   const { isDark, toggleTheme } = useTheme();
+  const label = isDark ? "Modo claro" : "Modo oscuro";
 
   return (
     <button
       type="button"
-      className="btn btn-icon btn-secondary"
+      className="btn btn-ghost aside-item"
       onClick={toggleTheme}
-      aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-      title={isDark ? "Modo claro" : "Modo oscuro"}
+      aria-pressed={isDark}
+      aria-label={label}
     >
-      {isDark ? <SunIcon size={18} /> : <MoonIcon size={18} />}
+      {isDark ? <SunIcon size={18} strokeWidth={1.9} /> : <MoonIcon size={18} strokeWidth={1.9} />}
+      <span className="aside-item-label">{label}</span>
     </button>
   );
 };
