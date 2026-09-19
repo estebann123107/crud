@@ -460,7 +460,7 @@ button:focus-visible,
 .task-text-label {
   min-width: 0;
   flex: 1;
-  
+
 }
 
 .task-text-input {
@@ -537,7 +537,123 @@ button:focus-visible,
 }
 
 /* ------------------------------------------------------------
-   8. ANIMACIONES
+   8. PAPELERA
+   ------------------------------------------------------------ */
+.paper-bin {
+  display: grid;
+  gap: var(--spacing-4);
+}
+
+.paper-bin-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+}
+
+.paper-bin-title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+}
+
+.paper-bin-count {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.paper-bin-empty-button,
+.paper-bin-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--font-size-sm);
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.paper-bin-empty-button:hover,
+.paper-bin-action:hover {
+  color: var(--color-text-main);
+  background: var(--color-bg-subtle);
+  border-color: var(--color-border-strong);
+}
+
+.paper-bin-empty-button:focus-visible,
+.paper-bin-action:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.paper-bin-list {
+  display: grid;
+  gap: var(--spacing-2);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.paper-bin-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.paper-bin-task-title {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+.paper-bin-actions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.paper-bin-action-danger:hover {
+  color: var(--color-danger);
+}
+
+.paper-bin-empty {
+  padding: var(--spacing-8) var(--spacing-4);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+}
+
+@media (max-width: 560px) {
+  .paper-bin-item {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .paper-bin-actions {
+    justify-content: flex-end;
+  }
+}
+
+/* ------------------------------------------------------------
+   9. ANIMACIONES
    ------------------------------------------------------------ */
 @keyframes appear {
   from {
