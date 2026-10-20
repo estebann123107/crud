@@ -1,100 +1,104 @@
-# CRUD - Gestor de tareas
+# CRUD - Task Manager
 
-Aplicación web para organizar actividades diarias con una interfaz moderna, ligera y funcional. Este proyecto permite crear tareas, editarlas, marcarlas como completadas, eliminarlas y recuperarlas desde una papelera antes de eliminarlas definitivamente.
+Web application to organize daily activities with a modern, lightweight, and functional interface. This project allows you to create tasks, edit them, mark them as completed, delete them, and recover them [...]
 
-## Descripción del proyecto
+## Project Description
 
-La aplicación funciona como un gestor de tareas personal, pensado para mantener el control de pendientes en un solo lugar. Su flujo principal se basa en un modelo CRUD, donde el usuario puede:
+The application works as a personal task manager designed to keep track of pending tasks in one place. Its main flow is based on a CRUD model, where the user can:
 
-- Crear nuevas tareas.
-- Editar el nombre de cada tarea en línea.
-- Marcar tareas como completadas o pendientes.
-- Eliminar tareas y enviarlas a la papelera.
-- Restaurar elementos eliminados.
-- Vaciar la papelera de forma permanente.
-- Guardar la información localmente en el navegador.
-- Cambiar entre modo claro y modo oscuro.
+- Create new tasks.
+- Edit the name of each task inline.
+- Mark tasks as completed or pending.
+- Delete tasks and send them to the trash.
+- Restore deleted items.
+- Empty the trash permanently.
+- Save information locally in the browser.
+- Switch between light and dark mode.
 
-## Características principales
+## Preview
 
-- Arquitectura con Next.js y React.
-- Interfaz de usuario enfocada en productividad y claridad visual.
-- Barras laterales para navegar entre tareas y papelera.
-- Conteo dinámico de tareas activas.
-- Estado vacío con mensaje amigable cuando no hay pendientes.
-- Persistencia de datos usando localStorage.
-- Tema oscuro/claro con preferencia guardada por el usuario.
-- Diseño responsive para distintos tamaños de pantalla.
-- Animación suave en la eliminación de tareas.
+![Crud preview](./screenshots/preview.png)
 
-## Tecnologías utilizadas
+## Main Features
+
+- Architecture with Next.js and React.
+- User interface focused on productivity and visual clarity.
+- Sidebars to navigate between tasks and trash.
+- Dynamic count of active tasks.
+- Empty state with a friendly message when there are no pending tasks.
+- Data persistence using localStorage.
+- Light/dark theme with preference saved by the user.
+- Responsive design for different screen sizes.
+- Smooth animation when deleting tasks.
+
+## Technologies Used
 
 - Next.js 16
 - React 19
 - TypeScript
-- CSS Modules y CSS global
-- localStorage para almacenamiento local
+- CSS Modules and global CSS
+- localStorage for local storage
 
-## Requisitos para su funcionamiento
+## Requirements for Operation
 
-Antes de iniciar el proyecto, asegúrate de tener instalado:
+Before starting the project, make sure you have installed:
 
-- Node.js 20 o superior
-- npm o Bun
+- Node.js 20 or higher
+- npm or Bun
 
-## Instalación
+## Installation
 
-1. Clona el repositorio.
-2. Entra a la carpeta del proyecto.
-3. Instala las dependencias:
+1. Clone the repository.
+2. Go to the project folder.
+3. Install the dependencies:
 
    npm install
 
-   o si prefieres Bun:
+   or if you prefer Bun:
 
    bun install
 
-## Ejecución
+## Execution
 
-### Modo desarrollo
+### Development mode
 
 npm run juju
 
-o con Bun:
+or with Bun:
 
 bun run juju
 
-Luego abre tu navegador en:
+Then open your browser at:
 
 http://localhost:3000
 
-### Compilar para producción
+### Compile for production
 
 npm run build
 
-### Ejecutar la versión compilada
+### Run the compiled version
 
 npm run start
 
-## Configuración relevante del proyecto
+## Relevant Project Configuration
 
-El proyecto no requiere un archivo .env para funcionar en su estado actual. La configuración principal se encuentra en estos archivos:
+The project does not require a .env file to function in its current state. The main configuration is in these files:
 
-- package.json: scripts y dependencias del proyecto.
-- next.config.ts: configuración general de Next.js.
-- tsconfig.json: configuración de TypeScript y alias de rutas.
-- src/app/globals.css: estilos visuales del sistema y tema oscuro/claro.
+- package.json: scripts and dependencies.
+- next.config.ts: general Next.js configuration.
+- tsconfig.json: TypeScript configuration and path aliases.
+- src/app/globals.css: visual styles of the system and light/dark theme.
 
-La aplicación usa almacenamiento local del navegador para conservar tareas y papelera sin necesidad de backend.
+The application uses browser local storage to preserve tasks and trash without the need for a backend.
 
-## Estructura general del proyecto
+## General Project Structure
 
-- src/app/components: componentes de interfaz.
-- src/app/hooks: lógica reutilizable como tareas, almacenamiento y papelera.
-- src/app/types: definiciones de tipos TypeScript.
-- src/app/icons: iconos reutilizables.
+- src/app/components: interface components.
+- src/app/hooks: reusable logic such as tasks, storage, and trash.
+- src/app/types: TypeScript type definitions.
+- src/app/icons: reusable icons.
 
-## Integrantes del proyecto
+## Team Members
 
 - Esteban Meléndez
 - Santiago Torregroza
@@ -102,6 +106,6 @@ La aplicación usa almacenamiento local del navegador para conservar tareas y pa
 - Gisell Falcón
 - Owen López
 
-## Nota
+## Note
 
-Este proyecto está pensado como un gestor personal de tareas con una experiencia simple, visualmente limpia y funcional en el navegador.
+This project is designed as a personal task manager with a simple, clean, and functional browser experience.
