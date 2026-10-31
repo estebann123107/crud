@@ -1,6 +1,6 @@
 import "./globals.css";
 
-/* Corre antes del primer pintado: sin esto la página parpadea en claro
+/* C orre antes del primer pintado: sin esto la página parpadea en claro
    antes de que React aplique el tema guardado o el del sistema. */
 const applyThemeBeforePaint = `
 (function () {
